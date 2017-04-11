@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">TallerAndroid</string>
+    <string name="app_name">tallerAndroid</string>
+    <string name="band_name">Band Name</string>
+    <string name="search">Search</string>
 </resources>
