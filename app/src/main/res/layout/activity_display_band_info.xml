@@ -7,7 +7,7 @@
     tools:context="com.example.tallerandroid.DisplayBandInfo">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
