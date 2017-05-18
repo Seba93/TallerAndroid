@@ -1,5 +1,9 @@
+package com.example.tallerandroid;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.example.tallerandroid.Band;
 
 /**
  * Created by seba on 17-05-17.
@@ -11,7 +15,7 @@ public class Album extends Model {
     @Column(name = "AlbumName")
     public String albumName;
 
-    @Column(name = "Band")
+    @Column(name = "com.example.tallerandroid.Band")
     public Band band;
 
     public Album() {

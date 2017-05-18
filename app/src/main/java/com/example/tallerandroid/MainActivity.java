@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    List<Band> bands = Band.getAll();
 
     public static final String BAND_NAME = "com.example.tallerandroid.BAND_NAME";
     public static final String ORIGIN_YEAR = "com.example.tallerandroid.ORIGIN_YEAR";

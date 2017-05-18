@@ -1,5 +1,9 @@
+package com.example.tallerandroid;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.example.tallerandroid.Album;
 
 /**
  * Created by seba on 17-05-17.
