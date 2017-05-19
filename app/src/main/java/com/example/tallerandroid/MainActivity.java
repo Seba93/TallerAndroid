@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Band> bands = Band.getAll();
+    // public List<Band> bands = Band.getAll();
+    private ListView listView;
+    private ArrayAdapter<String> bandsListAdapter;
+
 
     public static final String BAND_NAME = "com.example.tallerandroid.BAND_NAME";
     public static final String ORIGIN_YEAR = "com.example.tallerandroid.ORIGIN_YEAR";
@@ -19,24 +26,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Find the listView Resource
+        listView = (ListView) findViewById(R.id.listView);
+
+        // Create and populate a list of bands
+        String [] bands = new String[] {"Iron Maiden", "Judas Priest", "Saxon"};
+        ArrayList<String> bandsList = new ArrayList<>();
+        bandsList.addAll(Arrays.asList(bands));
+
+        // Create ArrayAdapter using the bands list
+        bandsListAdapter = new ArrayAdapter<>(this, R.layout.list_view_row, bandsList);
+
+        bandsListAdapter.add( "Dream Theater" );
+        bandsListAdapter.add( "Megadeth" );
+        bandsListAdapter.add( "Slayer" );
+        bandsListAdapter.add( "Accept" );
+        bandsListAdapter.add( "Opeth" );
+
+        // Set the ArrayAdapter as the ListView's adapter.
+        listView.setAdapter(bandsListAdapter);
     }
 
     // To display info of a given band (Search button method)
-    public void searchBand(View view) {
+    //public void searchBand(View view) {
         // Get band's name and origin year and send data to DisplayBandInfoActivity (Activity)
-        Intent intent = new Intent(this, DisplayBandInfoActivity.class);
+        //Intent intent = new Intent(this, DisplayBandInfoActivity.class);
         // Get band name
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String band_name = editText.getText().toString();
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String band_name = editText.getText().toString();
         // Get band origin year
-        EditText editText2 = (EditText) findViewById(R.id.editText2);
-        String band_origin_year = editText2.getText().toString();
+        //EditText editText2 = (EditText) findViewById(R.id.editText2);
+        //String band_origin_year = editText2.getText().toString();
 
         // Send data to DisplayBandInfoActivity
-        intent.putExtra(BAND_NAME, band_name);
-        intent.putExtra(ORIGIN_YEAR, band_origin_year);
-        startActivity(intent);
-    }
+        //intent.putExtra(BAND_NAME, band_name);
+        //intent.putExtra(ORIGIN_YEAR, band_origin_year);
+        //startActivity(intent);
+    //}
 
     @Override
     protected void onPause() {super.onPause();}

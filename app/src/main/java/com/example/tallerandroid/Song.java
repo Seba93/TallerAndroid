@@ -25,5 +25,6 @@ public class Song extends Model {
     public Song(String songName, Album album) {
         this.songName = songName;
         this.album = album;
+        this.save();
     }
 }

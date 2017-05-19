@@ -20,5 +20,6 @@ public class Country extends Model {
 
     public Country(String countryName) {
         this.countryName = countryName;
+        this.save();
     }
 }

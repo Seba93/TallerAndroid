@@ -20,5 +20,6 @@ public class Genre extends Model {
 
     public Genre(String genreName) {
         this.genreName = genreName;
+        this.save();
     }
 }

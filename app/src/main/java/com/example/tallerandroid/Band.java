@@ -36,6 +36,11 @@ public class Band extends Model {
         this.country = country;
         this.genre = genre;
         this.originYear = originYear;
+        this.save();
+    }
+
+    public String getBandName() {
+        return this.bandName;
     }
 
     public static ArrayList<Band> getAll() {

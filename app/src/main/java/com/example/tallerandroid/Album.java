@@ -15,7 +15,7 @@ public class Album extends Model {
     @Column(name = "AlbumName")
     public String albumName;
 
-    @Column(name = "com.example.tallerandroid.Band")
+    @Column(name = "Band")
     public Band band;
 
     public Album() {
@@ -25,5 +25,6 @@ public class Album extends Model {
     public Album(String albumName, Band band) {
         this.albumName = albumName;
         this.band = band;
+        this.save();
     }
 }
