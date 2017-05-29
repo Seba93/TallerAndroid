@@ -18,13 +18,17 @@ public class Song extends Model {
     @Column(name = "Album")
     public Album album;
 
+    @COlumn(name = "TrackNumber")
+    public int trackNumber;
+
     public Song() {
         super();
     }
 
-    public Song(String songName, Album album) {
+    public Song(String songName, Album album, int trackNumber) {
         this.songName = songName;
         this.album = album;
+        this.trackNumber = trackNumber;
         this.save();
     }
 }

@@ -18,13 +18,17 @@ public class Album extends Model {
     @Column(name = "Band")
     public Band band;
 
+    @Column(name = "ReleaseDate")
+    public int albumReleaseDate;
+
     public Album() {
         super();
     }
 
-    public Album(String albumName, Band band) {
+    public Album(String albumName, Band band, int albumReleaseDate) {
         this.albumName = albumName;
         this.band = band;
+        this.albumReleaseDate = albumReleaseDate;
         this.save();
     }
 }
