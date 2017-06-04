@@ -4,25 +4,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-
-import com.activeandroid.Model;
 import com.activeandroid.query.Delete;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public List<Band> bands = Band.getAll();
-    private ListView listView;
-    private ArrayAdapter<String> bandsListAdapter;
-
+    public static final String BAND_ID = "com.example.tallerandroid.BAND_ID";
     public static final String BAND_NAME = "com.example.tallerandroid.BAND_NAME";
+    public static final String BAND_COUNTRY = "com.example.tallerandroid.BAND_COUNTRY";
+    public static final String BAND_GENRE = "com.example.tallerandroid.BAND_GENRE";
     public static final String ORIGIN_YEAR = "com.example.tallerandroid.ORIGIN_YEAR";
 
     @Override
@@ -31,46 +24,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Clear database
+        new Delete().from(Song.class).execute();
+        new Delete().from(Album.class).execute();
+        new Delete().from(Band.class).execute();
+        new Delete().from(Song.class).execute();
+        new Delete().from(Genre.class).execute();
+        new Delete().from(Country.class).execute();
+
         // Add rows to each database table
         this.insertData();
 
         // Find the listView Resource
-        listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.listView);
 
-        // Create and populate a list of bands
-        String [] bands = new String[] {"Iron Maiden", "Judas Priest", "Saxon"};
-        ArrayList<String> bandsList = new ArrayList<>();
-        bandsList.addAll(Arrays.asList(bands));
+        // Get list of bands
+        ArrayList<Band> bands = Band.getAll();
+
+        // Get the name of each existing band
+        //ArrayList<String> bandsNames = new ArrayList<>();
+        //for (Band band : bands) {
+        //    bandsNames.add(band.getBandName());
+        //}
 
         // Create ArrayAdapter using the bands list
-        bandsListAdapter = new ArrayAdapter<>(this, R.layout.list_view_row, bandsList);
-
-        bandsListAdapter.add( "Dream Theater" );
-        bandsListAdapter.add( "Megadeth" );
-        bandsListAdapter.add( "Slayer" );
-        bandsListAdapter.add( "Accept" );
-        bandsListAdapter.add( "Opeth" );
+        ArrayAdapter<Band> bandsListAdapter = new ArrayAdapter<>(this, R.layout.list_view_row, bands);
 
         // Set the ArrayAdapter as the ListView's adapter.
         listView.setAdapter(bandsListAdapter);
+
+        // On listView item click
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Band band = (Band) adapter.getItemAtPosition(position);
+                showBandInfo(band);
+            }
+        });
     }
 
-    // To display info of a given band (Search button method)
-    //public void searchBand(View view) {
-        // Get band's name and origin year and send data to DisplayBandInfoActivity (Activity)
-        //Intent intent = new Intent(this, DisplayBandInfoActivity.class);
-        // Get band name
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String band_name = editText.getText().toString();
-        // Get band origin year
-        //EditText editText2 = (EditText) findViewById(R.id.editText2);
-        //String band_origin_year = editText2.getText().toString();
+    // To display info of a given band
+    public void showBandInfo(Band band) {
+        // Get a band and send data to DisplayBandInfoActivity (Activit)
+        Intent intent = new Intent(this, DisplayBandInfoActivity.class);
 
         // Send data to DisplayBandInfoActivity
-        //intent.putExtra(BAND_NAME, band_name);
-        //intent.putExtra(ORIGIN_YEAR, band_origin_year);
-        //startActivity(intent);
-    //}
+        intent.putExtra(BAND_ID, String.valueOf(band.getId()));
+        intent.putExtra(BAND_NAME, band.getBandName());
+        intent.putExtra(BAND_COUNTRY, band.getCountry().getCountryName());
+        intent.putExtra(BAND_GENRE, band.getGenre().getGenreName());
+        intent.putExtra(ORIGIN_YEAR, String.valueOf(band.getOriginYear()));
+        startActivity(intent);
+    }
 
     protected void insertData() {
         // Add countries to database
@@ -191,13 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        // Clear database on destroy event
         super.onDestroy();
-        new Delete().from(Song.class);
-        new Delete().from(Album.class);
-        new Delete().from(Band.class);
-        new Delete().from(Song.class);
-        new Delete().from(Genre.class);
-        new Delete().from(Country.class);
     }
 }

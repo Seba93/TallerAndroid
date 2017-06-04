@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class DisplayBandInfoActivity extends AppCompatActivity {
 
     public ResponseReceiver receiver;
@@ -19,11 +21,24 @@ public class DisplayBandInfoActivity extends AppCompatActivity {
 
         // Get intent started by MainActivity and extract data
         Intent intent = getIntent();
+        int band_id = Integer.valueOf(intent.getStringExtra(MainActivity.BAND_ID));
         String band_name = intent.getStringExtra(MainActivity.BAND_NAME);
+        String band_country = intent.getStringExtra(MainActivity.BAND_COUNTRY);
+        String band_genre = intent.getStringExtra(MainActivity.BAND_GENRE);
         String band_origin_year = intent.getStringExtra(MainActivity.ORIGIN_YEAR);
 
+        // Set Text Views
+        TextView textViewName = (TextView) findViewById(R.id.textViewName);
+        textViewName.setText("Band: " + band_name);
+        TextView textViewCountry = (TextView) findViewById(R.id.textViewCountry);
+        textViewCountry.setText("Country: " + band_country);
+        TextView textViewGenre = (TextView) findViewById(R.id.textViewGenre);
+        textViewGenre.setText("Genre: " + band_genre);
+        TextView textViewOriginYear = (TextView) findViewById(R.id.textViewOriginYear);
+        textViewOriginYear.setText("Origin Year: " + band_origin_year);
+
         // Send data to an IntentService
-        this.dataToService(band_name, band_origin_year);
+        this.dataToService(band_origin_year);
 
         // Register the broadcast receiver through a filter
         IntentFilter filter = new IntentFilter(ResponseReceiver.DATA_PROCESSED);
@@ -43,19 +58,17 @@ public class DisplayBandInfoActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             //Modify DisplayBandInfoActivity layout to display band data
-            TextView textView = (TextView) findViewById(R.id.textView);
-            String band_name = intent.getStringExtra(RSSPullService.BAND_NAME);
+            TextView textViewYearsActive = (TextView) findViewById(R.id.textViewYearsActive);
             String years_active = intent.getStringExtra(RSSPullService.YEARS_ACTIVE);
-            textView.setText(band_name + " has been active for " + years_active + " years");
+            textViewYearsActive.setText("Years Active: " + years_active + " years");
         }
     }
 
-    public void dataToService(String band_name, String band_origin_year) {
+    public void dataToService(String band_origin_year) {
         // Send data to IntentService
         Intent intentService = new Intent(this, RSSPullService.class);
-        intentService.putExtra(RSSPullService.BAND_NAME, band_name);
         intentService.putExtra(RSSPullService.ORIGIN_YEAR, band_origin_year);
-        //Start the IntentService and send band's name and origin year
+        //Start the IntentService and send band's origin year
         startService(intentService);
     }
 

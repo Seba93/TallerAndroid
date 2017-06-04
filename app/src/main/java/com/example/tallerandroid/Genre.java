@@ -12,7 +12,7 @@ import com.activeandroid.annotation.Table;
 public class Genre extends Model {
 
     @Column(name = "GenreName")
-    public String genreName;
+    private String genreName;
 
     public Genre() {
         super();
@@ -22,4 +22,6 @@ public class Genre extends Model {
         this.genreName = genreName;
         this.save();
     }
+
+    public String getGenreName() {return this.genreName;}
 }

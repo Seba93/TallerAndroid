@@ -13,13 +13,13 @@ import com.example.tallerandroid.Album;
 public class Song extends Model {
 
     @Column(name = "SongName")
-    public String songName;
+    private String songName;
 
     @Column(name = "Album")
-    public Album album;
+    private Album album;
 
-    @COlumn(name = "TrackNumber")
-    public int trackNumber;
+    @Column(name = "TrackNumber")
+    private int trackNumber;
 
     public Song() {
         super();

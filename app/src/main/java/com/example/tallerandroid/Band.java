@@ -15,16 +15,16 @@ import java.util.ArrayList;
 public class Band extends Model {
 
     @Column(name = "BandName")
-    public String bandName;
+    private String bandName;
 
     @Column(name = "Country")
-    public Country country;
+    private Country country;
 
     @Column(name = "Genre")
-    public Genre genre;
+    private Genre genre;
 
     @Column(name = "OriginYear")
-    public int originYear;
+    private int originYear;
 
     public Band() {
         super();
@@ -43,10 +43,21 @@ public class Band extends Model {
         return this.bandName;
     }
 
+    public int getOriginYear() {return this.originYear;}
+
+    public Country getCountry() {return this.country;}
+
+    public Genre getGenre() {return this.genre;}
+
     public static ArrayList<Band> getAll() {
         return new Select()
                 .from(Band.class)
                 .orderBy("BandName")
                 .execute();
+    }
+
+    @Override
+    public String toString() {
+        return this.bandName;
     }
 }

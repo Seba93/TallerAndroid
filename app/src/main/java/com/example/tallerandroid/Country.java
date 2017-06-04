@@ -12,7 +12,7 @@ import com.activeandroid.annotation.Table;
 public class Country extends Model {
 
     @Column(name = "CountryName")
-    public String countryName;
+    private String countryName;
 
     public Country() {
         super();
@@ -22,4 +22,6 @@ public class Country extends Model {
         this.countryName = countryName;
         this.save();
     }
+
+    public String getCountryName() {return this.countryName;}
 }
