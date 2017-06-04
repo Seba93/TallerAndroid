@@ -56,6 +56,16 @@ public class Band extends Model {
                 .execute();
     }
 
+    public static ArrayList<Album> getBandAlbums(double band_id) {
+        return new Select()
+                .from(Album.class)
+                .join(Band.class)
+                .on("Band.Id = Album.Band")
+                .where("Band.Id = ?", band_id)
+                .orderBy("Album.ReleaseDate")
+                .execute();
+    }
+
     @Override
     public String toString() {
         return this.bandName;

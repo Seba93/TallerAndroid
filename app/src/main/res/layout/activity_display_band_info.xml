@@ -64,4 +64,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewGenre"
         tools:layout_constraintTop_creator="1" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_albums"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="196dp"
+        android:onClick="viewAlbums"/>
+
 </android.support.constraint.ConstraintLayout>

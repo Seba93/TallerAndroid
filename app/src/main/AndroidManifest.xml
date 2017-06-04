@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="Bands.db" />
@@ -25,20 +24,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DisplayBandInfoActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
         </activity>
 
         <service
             android:name=".RSSPullService"
-            android:exported="false"/>
+            android:exported="false" />
 
+        <activity
+            android:name=".DisplayAlbumsActivity"
+            android:parentActivityName=".DisplayBandInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DisplayBandInfoActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -31,4 +31,12 @@ public class Album extends Model {
         this.albumReleaseDate = albumReleaseDate;
         this.save();
     }
+
+    public String getAlbumName() {
+        return this.albumName;
+    }
+
+    public int getAlbumReleaseDate() {
+        return this.albumReleaseDate;
+    }
 }

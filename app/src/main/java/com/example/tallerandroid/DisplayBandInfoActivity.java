@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -13,6 +14,8 @@ import org.w3c.dom.Text;
 public class DisplayBandInfoActivity extends AppCompatActivity {
 
     public ResponseReceiver receiver;
+    public static final String BAND_ID = "com.example.tallerandroid.BAND_ID";
+    String band_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class DisplayBandInfoActivity extends AppCompatActivity {
 
         // Get intent started by MainActivity and extract data
         Intent intent = getIntent();
-        int band_id = Integer.valueOf(intent.getStringExtra(MainActivity.BAND_ID));
+        this.band_id = intent.getStringExtra(MainActivity.BAND_ID);
         String band_name = intent.getStringExtra(MainActivity.BAND_NAME);
         String band_country = intent.getStringExtra(MainActivity.BAND_COUNTRY);
         String band_genre = intent.getStringExtra(MainActivity.BAND_GENRE);
@@ -72,4 +75,10 @@ public class DisplayBandInfoActivity extends AppCompatActivity {
         startService(intentService);
     }
 
+    // To view albums of a given bandS
+    public void viewAlbums(View view) {
+        Intent intent = new Intent(this, DisplayAlbumsActivity.class);
+        intent.putExtra(BAND_ID, band_id);
+        startActivity(intent);
+    }
 }
