@@ -3,7 +3,10 @@ package com.example.tallerandroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 import com.example.tallerandroid.Band;
+
+import java.util.ArrayList;
 
 /**
  * Created by seba on 17-05-17.
@@ -38,5 +41,16 @@ public class Album extends Model {
 
     public int getAlbumReleaseDate() {
         return this.albumReleaseDate;
+    }
+
+    public static ArrayList<Song> getAlbumSongs(String albumName) {
+
+        return new Select()
+                .from(Song.class)
+                .join(Album.class)
+                .on("Album.Id = Song.Album")
+                .where("Album.AlbumName = ?", albumName)
+                .orderBy("Song.TrackNumber")
+                .execute();
     }
 }

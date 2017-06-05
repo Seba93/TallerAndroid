@@ -31,4 +31,16 @@ public class Song extends Model {
         this.trackNumber = trackNumber;
         this.save();
     }
+
+    public void doNothing() {
+
+    }
+
+    public String getSongName() {
+        return this.songName;
+    }
+
+    public int getTrackNumber() {
+        return this.trackNumber;
+    }
 }

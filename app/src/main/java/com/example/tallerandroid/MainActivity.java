@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     // To display info of a given band
     public void showBandInfo(Band band) {
-        // Get a band and send data to DisplayBandInfoActivity (Activit)
+        // Get a band and send data to DisplayBandInfoActivity (Activity)
         Intent intent = new Intent(this, DisplayBandInfoActivity.class);
 
         // Send data to DisplayBandInfoActivity
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         Song starlight = new Song ("Starlight", breaker, 1);
         Song burning = new Song ("Burning", breaker, 2);
         Song feelings = new Song("Feelings", breaker, 3);
-        Song midnightHighway = new Song ("MidnightHighway", breaker, 4);
+        Song midnightHighway = new Song ("Midnight Highway", breaker, 4);
         Song hellfire = new Song ("Hellfire", stalingrad, 1);
         Song revolution = new Song ("Revolution", stalingrad, 2);
         Song neverForget = new Song("Never Forget", stalingrad, 3);
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         Song requiem = new Song("Requiem", orchid, 4);
         Song persephone = new Song("Persephone", sorceress, 1);
         Song chrysalis = new Song("Chrysalis", sorceress, 2);
-        Song  era = new Song("Eera", sorceress, 3);
+        Song era = new Song("Eera", sorceress, 3);
         Song theWard = new Song("The Ward", sorceress, 4);
     }
 

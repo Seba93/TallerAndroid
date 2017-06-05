@@ -56,12 +56,12 @@ public class Band extends Model {
                 .execute();
     }
 
-    public static ArrayList<Album> getBandAlbums(double band_id) {
+    public static ArrayList<Album> getBandAlbums(Long bandId) {
         return new Select()
                 .from(Album.class)
                 .join(Band.class)
                 .on("Band.Id = Album.Band")
-                .where("Band.Id = ?", band_id)
+                .where("Band.Id = ?", bandId)
                 .orderBy("Album.ReleaseDate")
                 .execute();
     }

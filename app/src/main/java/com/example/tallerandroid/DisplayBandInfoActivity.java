@@ -75,7 +75,7 @@ public class DisplayBandInfoActivity extends AppCompatActivity {
         startService(intentService);
     }
 
-    // To view albums of a given bandS
+    // To view albums of a given band
     public void viewAlbums(View view) {
         Intent intent = new Intent(this, DisplayAlbumsActivity.class);
         intent.putExtra(BAND_ID, band_id);
